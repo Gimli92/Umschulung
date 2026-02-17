@@ -142,7 +142,7 @@ buchliste = [
     Roman("1984", "George Orwell",
           "978-0141036144", True, "Dystopie"),
     Fachbuch("Informatik für Dummies", "christian Haffner",
-          "978-3527716198", True, "Lehrbuch"),
+             "978-3527716198", True, "Lehrbuch"),
     Roman("Der große Gatsby", "F. Scott Fitzgerald",
           "978-0743273565", False, "Klassiker"),
     Roman("Moby Dick", "Herman Melville",
