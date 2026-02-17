@@ -46,21 +46,6 @@ class Books:
                 f"ISBN: {self.__isbn}, Verliehen? {__status}")
 
 
-# Test der Klasse Books
-'''
-buch1 = Books("Eragon Band 1", 123456789,
-              "Christopher Paolini", False)
-print(buch1)
-Books.verfuegbarkeit(buch1)
-Books.ausleihen(buch1)
-Books.verfuegbarkeit(buch1)
-print(buch1)
-Books.rueckgabe(buch1)
-Books.verfuegbarkeit(buch1)
-print(buch1)
-'''
-
-
 class Roman(Books):
 
     def __init__(self, name, isbn, author, verliehen, genre):
@@ -71,23 +56,6 @@ class Roman(Books):
     def __str__(self):
 
         return super().__str__() + f", Genre: {self.__genre}"
-
-
-# Test Klasse Roman
-'''
-buch1 = Roman("Eragon Band 1", 123456789,
-              "Christopher Paolini", False, "Fantasy")
-
-
-print(buch1)
-Books.verfuegbarkeit(buch1)
-Books.ausleihen(buch1)
-Books.verfuegbarkeit(buch1)
-print(buch1)
-Books.rueckgabe(buch1)
-Books.verfuegbarkeit(buch1)
-print(buch1)
-'''
 
 
 class Fachbuch(Books):
@@ -115,3 +83,13 @@ Books.rueckgabe(buch1)
 Books.verfuegbarkeit(buch1)
 print(buch1)
 '''
+class Buecherei:
+
+    def __init__(self, name, buecher):
+
+        self.__name = name
+        self.__buecher = buecher
+
+buch1 = Roman("Eragon Band 1", 123456789, "Christopher Paolini", False, "Fantasy")
+
+print(buch1)
