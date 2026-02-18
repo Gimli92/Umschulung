@@ -130,6 +130,10 @@ class Buecherei(Books):
         for buch in self.__buecher:
             print(buch)
 
+    def buecheranzahl(self):
+
+        print(len(self.__buecher))
+
 
 # Objekt Erstellung
 buecherei = Buecherei("Pustet")
@@ -173,9 +177,9 @@ buchliste = [
              "978-3527716198", False, "Lehrbuch")
 ]
 
-for buch in buchliste:
+for i in buchliste:
 
-    buecherei.buch_hinzufuegen(buch)
+    buecherei.buch_hinzufuegen(i)
 # Test der Methoden
 
 
@@ -183,3 +187,5 @@ buecherei.buecherliste()
 # buecherei.buch_finden(str(input()))
 buecherei.buch_entfernen("123-123456789")
 buecherei.buecherliste()
+print(Books.book_count)
+buecherei.buecheranzahl()
