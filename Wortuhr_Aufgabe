@@ -13,6 +13,33 @@ letters = [
     ['S', 'I', 'E', 'B', 'E', 'N', 'Z', 'W', 'Ö', 'L', 'F'],
     ['Z', 'E', 'H', 'N', 'E', 'U', 'N', 'K', 'U', 'H', 'R']
 ]
+words = ["ES", "IST", "VOR", "HALB", "NACH", "VIERTEL", "DREIVIERTEL", "EINS", "ZWEI", "DREI",
+         "VIER", "FÜNF", "SECHS", "SIEBEN", "ACHT", "NEUN", "ZEHN",
+         "ELF", "ZWÖLF", "ZWANZIG", "UHR"]
+
+
+def find_words(grid, words):
+    results = {}
+
+    for word in words:
+        results[word] = []
+        for r, row in enumerate(grid):
+            row_string = "".join(row)
+            start = 0
+
+            while True:
+                start = row_string.find(word, start)
+                if start == -1:
+                    break
+
+                positions = []
+                for i in range(len(word)):
+                    positions.append((r, start + i))
+
+                results[word].append(positions)
+                start += 1
+
+    return results
 
 
 def set_color(positions, color):
@@ -63,7 +90,7 @@ def update_time():
         set_color(nach, "red")
 
     elif minuten == 20:
-        set_color(zwanzig_min, "red")
+        set_color(zwanzig, "red")
         set_color(nach, "red")
 
     elif minuten == 25:
@@ -85,7 +112,7 @@ def update_time():
         set_color(halb, "red")
 
     elif minuten == 45:
-        set_color(drei_viertel, "red")
+        set_color(dreiviertel, "red")
 
     elif minuten == 50:
         set_color(zehn_min, "red")
@@ -142,29 +169,32 @@ for r, row in enumerate(letters):
         lbl.grid(row=r, column=c)
         label_row.append(lbl)
     label_grid.append(label_row)
-    es_ist = [(0, 0), (0, 1), (0, 3), (0, 4), (0, 5)]
-    fuenf_min = [(0, 7), (0, 8), (0, 9), (0, 10)]
-    zehn_min = [(1, 0), (1, 1), (1, 2), (1, 3)]
-    zwanzig_min = [(1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10)]
-    drei_viertel = [(2, 0), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6),
-                    (2, 7), (2, 8), (2, 9), (2, 10)]
-    viertel = [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9), (2, 10)]
-    vor = [(3, 0), (3, 1), (3, 2)]
-    nach = [(3, 7), (3, 8), (3, 9), (3, 10)]
-    halb = [(4, 0), (4, 1), (4, 2), (4, 3)]
-    elf = [(4, 5), (4, 6), (4, 7)]
-    fuenf = [(4, 7), (4, 8), (4, 9), (4, 10)]
-    eins = [(5, 0), (5, 1), (5, 2), (5, 3)]
-    zwei = [(5, 7), (5, 8), (5, 9), (5, 10)]
-    drei = [(6, 0), (6, 1), (6, 2), (6, 3)]
-    vier = [(6, 7), (6, 8), (6, 9), (6, 10)]
-    sechs = [(7, 0), (7, 1), (7, 2), (7, 3), (7, 4)]
-    acht = [(7, 7), (7, 8), (7, 9), (7, 10)]
-    sieben = [(8, 0), (8, 1), (8, 2), (8, 3), (8, 4), (8, 5)]
-    zwoelf = [(8, 6), (8, 7), (8, 8), (8, 9), (8, 10)]
-    zehn = [(9, 0), (9, 1), (9, 2), (9, 3)]
-    neun = [(9, 3), (9, 4), (9, 5), (9, 6)]
-    uhr_anzeige = [(9, 8), (9, 9), (9, 10)]
+
+
+word_pos = find_words(letters, words)
+
+es_ist = word_pos["ES"][0] + word_pos["IST"][0]
+viertel = word_pos["VIERTEL"][0]
+dreiviertel = word_pos["DREIVIERTEL"][0]
+uhr_anzeige = word_pos["UHR"][0]
+eins = word_pos["EINS"][0]
+zwei = word_pos["ZWEI"][0]
+drei = word_pos["DREI"][0]
+vier = word_pos["VIER"][1]
+fuenf = word_pos["FÜNF"][1]
+fuenf_min = word_pos["FÜNF"][0]
+sechs = word_pos["SECHS"][0]
+sieben = word_pos["SIEBEN"][0]
+acht = word_pos["ACHT"][0]
+neun = word_pos["NEUN"][0]
+zehn = word_pos["ZEHN"][1]
+zehn_min = word_pos["ZEHN"][0]
+elf = word_pos["ELF"][0]
+zwoelf = word_pos["ZWÖLF"][0]
+zwanzig = word_pos["ZWANZIG"][0]
+nach = word_pos["NACH"][0]
+halb = word_pos["HALB"][0]
+vor = word_pos["VOR"][0]
 
 
 for i in range(4):
