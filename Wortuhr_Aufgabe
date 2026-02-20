@@ -1,0 +1,193 @@
+import tkinter as tk
+import time
+
+letters = [
+    ['E', 'S', 'K', 'I', 'S', 'T', 'A', 'F', 'Ü', 'N', 'F'],
+    ['Z', 'E', 'H', 'N', 'Z', 'W', 'A', 'N', 'Z', 'I', 'G'],
+    ['D', 'R', 'E', 'I', 'V', 'I', 'E', 'R', 'T', 'E', 'L'],
+    ['V', 'O', 'R', 'F', 'U', 'N', 'K', 'N', 'A', 'C', 'H'],
+    ['H', 'A', 'L', 'B', 'A', 'E', 'L', 'F', 'Ü', 'N', 'F'],
+    ['E', 'I', 'N', 'S', 'X', 'A', 'M', 'Z', 'W', 'E', 'I'],
+    ['D', 'R', 'E', 'I', 'P', 'M', 'J', 'V', 'I', 'E', 'R'],
+    ['S', 'E', 'C', 'H', 'S', 'N', 'L', 'A', 'C', 'H', 'T'],
+    ['S', 'I', 'E', 'B', 'E', 'N', 'Z', 'W', 'Ö', 'L', 'F'],
+    ['Z', 'E', 'H', 'N', 'E', 'U', 'N', 'K', 'U', 'H', 'R']
+]
+
+
+def set_color(positions, color):
+    for r, c in positions:
+        label_grid[r][c].config(fg=color)
+
+
+def reset_color_bg():
+
+    for lbl2 in label_grid_min:
+        lbl2.config(fg="black")
+
+
+def set_color_bg(positions, color):
+    for r, c in positions:
+        label_grid_min[r][c].config(fg=color)
+
+
+def reset_color():
+    for row in label_grid:
+        for lbl in row:
+            lbl.config(fg="white")
+
+
+def update_time():
+    reset_color()
+    reset_color_bg()
+
+    jetzt = time.localtime()
+    stunden = jetzt.tm_hour
+    minuten = (jetzt.tm_min // 5) * 5
+    rest = jetzt.tm_min % 5
+    set_color(es_ist, "red")
+
+    if minuten == 0:
+        set_color(uhr_anzeige, "red")
+
+    elif minuten == 5:
+        set_color(fuenf_min, "red")
+        set_color(nach, "red")
+
+    elif minuten == 10:
+        set_color(zehn_min, "red")
+        set_color(nach, "red")
+
+    elif minuten == 15:
+        set_color(viertel, "red")
+        set_color(nach, "red")
+
+    elif minuten == 20:
+        set_color(zwanzig_min, "red")
+        set_color(nach, "red")
+
+    elif minuten == 25:
+        set_color(fuenf_min, "red")
+        set_color(vor, "red")
+        set_color(halb, "red")
+
+    elif minuten == 30:
+        set_color(halb, "red")
+
+    elif minuten == 35:
+        set_color(fuenf_min, "red")
+        set_color(nach, "red")
+        set_color(halb, "red")
+
+    elif minuten == 40:
+        set_color(zehn_min, "red")
+        set_color(nach, "red")
+        set_color(halb, "red")
+
+    elif minuten == 45:
+        set_color(drei_viertel, "red")
+
+    elif minuten == 50:
+        set_color(zehn_min, "red")
+        set_color(vor, "red")
+
+    elif minuten == 55:
+        set_color(fuenf_min, "red")
+        set_color(vor, "red")
+
+    for i in range(rest):
+        label_grid_min[i].config(fg="red")
+
+    anzeige_stunde = stunden
+
+    if minuten >= 25:
+        anzeige_stunde += 1
+    anzeige_stunde %= 12
+
+    stunden_dict = {
+        0: zwoelf,
+        1: eins,
+        2: zwei,
+        3: drei,
+        4: vier,
+        5: fuenf,
+        6: sechs,
+        7: sieben,
+        8: acht,
+        9: neun,
+        10: zehn,
+        11: elf
+    }
+
+    set_color(stunden_dict[anzeige_stunde], "red")
+
+    uhr.after(1000, update_time)
+
+
+label_grid = []
+label_grid_min = []
+
+uhr = tk.Tk()
+uhr.title("Wort Uhr")
+uhr.config(bg="black")
+uhr.geometry("290x460")
+uhr.resizable(False, False)
+
+
+for r, row in enumerate(letters):
+    label_row = []
+    for c, char in enumerate(row):
+        lbl = tk.Label(uhr, text=char, fg="white", bg="black",
+                       font=("Courier", 25))
+        lbl.grid(row=r, column=c)
+        label_row.append(lbl)
+    label_grid.append(label_row)
+    es_ist = [(0, 0), (0, 1), (0, 3), (0, 4), (0, 5)]
+    fuenf_min = [(0, 7), (0, 8), (0, 9), (0, 10)]
+    zehn_min = [(1, 0), (1, 1), (1, 2), (1, 3)]
+    zwanzig_min = [(1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10)]
+    drei_viertel = [(2, 0), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6),
+                    (2, 7), (2, 8), (2, 9), (2, 10)]
+    viertel = [(2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9), (2, 10)]
+    vor = [(3, 0), (3, 1), (3, 2)]
+    nach = [(3, 7), (3, 8), (3, 9), (3, 10)]
+    halb = [(4, 0), (4, 1), (4, 2), (4, 3)]
+    elf = [(4, 5), (4, 6), (4, 7)]
+    fuenf = [(4, 7), (4, 8), (4, 9), (4, 10)]
+    eins = [(5, 0), (5, 1), (5, 2), (5, 3)]
+    zwei = [(5, 7), (5, 8), (5, 9), (5, 10)]
+    drei = [(6, 0), (6, 1), (6, 2), (6, 3)]
+    vier = [(6, 7), (6, 8), (6, 9), (6, 10)]
+    sechs = [(7, 0), (7, 1), (7, 2), (7, 3), (7, 4)]
+    acht = [(7, 7), (7, 8), (7, 9), (7, 10)]
+    sieben = [(8, 0), (8, 1), (8, 2), (8, 3), (8, 4), (8, 5)]
+    zwoelf = [(8, 6), (8, 7), (8, 8), (8, 9), (8, 10)]
+    zehn = [(9, 0), (9, 1), (9, 2), (9, 3)]
+    neun = [(9, 3), (9, 4), (9, 5), (9, 6)]
+    uhr_anzeige = [(9, 8), (9, 9), (9, 10)]
+
+minute1 = [(11, 2)]
+minute2 = [(11, 4)]
+minute3 = [(11, 6)]
+minute4 = [(11, 8)]
+
+
+for i in range(4):
+    lbl2 = tk.Label(uhr, text="●", bg="black", fg="black",
+                    font=("Courier", 20))
+    lbl2.grid(row=11, column=2 + i * 2)
+    label_grid_min.append(lbl2)
+    minute1 = [(11, 2)]
+    minute2 = [(11, 4)]
+    minute3 = [(11, 6)]
+    minute4 = [(11, 8)]
+
+
+aktuelle_zeit = time.localtime()
+stunden = aktuelle_zeit.tm_hour
+minuten = aktuelle_zeit.tm_min
+
+
+update_time()
+
+uhr.mainloop()

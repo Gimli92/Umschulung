@@ -78,22 +78,7 @@ class Fachbuch(Books):
         return super().__str__() + f", Fach: {self.__fach}"
 
 
-# Test Klasse Fachbuch
-'''
-buch1 = Fachbuch("IT-Berufe", 123456789, "Gratzke", False, "IT")
-
-print(buch1)
-Books.verfuegbarkeit(buch1)
-Books.ausleihen(buch1)
-Books.verfuegbarkeit(buch1)
-print(buch1)
-Books.rueckgabe(buch1)
-Books.verfuegbarkeit(buch1)
-print(buch1)
-'''
-
-
-class Buecherei(Books):
+class Buecherei:
 
     def __init__(self, name):
 
@@ -177,14 +162,14 @@ buchliste = [
              "978-3527716198", False, "Lehrbuch")
 ]
 
-for i in buchliste:
+for buch in buchliste:
 
-    buecherei.buch_hinzufuegen(i)
+    buecherei.buch_hinzufuegen(buch)
 # Test der Methoden
 
 
 buecherei.buecherliste()
-# buecherei.buch_finden(str(input()))
+buecherei.buch_finden("123-987654321")
 buecherei.buch_entfernen("123-123456789")
 buecherei.buecherliste()
 print(Books.book_count)
