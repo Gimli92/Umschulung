@@ -9,6 +9,7 @@ SEATS = {
     'B1': False, 'B2': False, 'B3': False
 }
 
+
 def handle_message(client_socket, message: str):
     """Logikschicht: verarbeitet eine Nachricht und sendet Antwort zurück."""
     message = message.strip().upper()
@@ -35,6 +36,7 @@ def handle_message(client_socket, message: str):
 
     client_socket.sendall((response + "\n").encode("utf-8"))
 
+
 def main():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind((HOST, PORT))
@@ -52,6 +54,7 @@ def main():
                     break
                 message = data.decode('utf-8')
                 handle_message(client_socket, message)
+
 
 if __name__ == "__main__":
     main()

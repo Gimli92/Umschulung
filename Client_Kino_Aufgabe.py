@@ -3,11 +3,13 @@ import socket
 HOST = '127.0.0.1'
 PORT = 12345
 
+
 def main():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         client_socket.connect((HOST, PORT))
-        print("Connected to server. Type LIST or a seat (e.g., A1). CTRL+C to quit.")
+        print("Connected to server. Type LIST or a seat"
+              "(e.g., A1). CTRL+C to quit.")
 
         while True:
             choice = input('> ')
@@ -31,6 +33,7 @@ def main():
     finally:
         client_socket.close()
         print("Connection closed.")
+
 
 if __name__ == "__main__":
     main()

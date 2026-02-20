@@ -166,22 +166,18 @@ for r, row in enumerate(letters):
     neun = [(9, 3), (9, 4), (9, 5), (9, 6)]
     uhr_anzeige = [(9, 8), (9, 9), (9, 10)]
 
-minute1 = [(11, 2)]
-minute2 = [(11, 4)]
-minute3 = [(11, 6)]
-minute4 = [(11, 8)]
-
 
 for i in range(4):
     lbl2 = tk.Label(uhr, text="●", bg="black", fg="black",
                     font=("Courier", 20))
     lbl2.grid(row=11, column=2 + i * 2)
     label_grid_min.append(lbl2)
-    minute1 = [(11, 2)]
-    minute2 = [(11, 4)]
-    minute3 = [(11, 6)]
-    minute4 = [(11, 8)]
 
+
+minute1 = [(11, 2)]
+minute2 = [(11, 4)]
+minute3 = [(11, 6)]
+minute4 = [(11, 8)]
 
 aktuelle_zeit = time.localtime()
 stunden = aktuelle_zeit.tm_hour
