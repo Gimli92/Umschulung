@@ -13,9 +13,9 @@ letters = [
     ['S', 'I', 'E', 'B', 'E', 'N', 'Z', 'W', 'Ö', 'L', 'F'],
     ['Z', 'E', 'H', 'N', 'E', 'U', 'N', 'K', 'U', 'H', 'R']
 ]
-words = ["ES", "IST", "VOR", "HALB", "NACH", "VIERTEL", "DREIVIERTEL", "EINS", "ZWEI", "DREI",
-         "VIER", "FÜNF", "SECHS", "SIEBEN", "ACHT", "NEUN", "ZEHN",
-         "ELF", "ZWÖLF", "ZWANZIG", "UHR"]
+words = ["ES", "IST", "VOR", "HALB", "NACH", "VIERTEL", "DREIVIERTEL",
+         "EINS", "ZWEI", "DREI", "VIER", "FÜNF", "SECHS", "SIEBEN",
+         "ACHT", "NEUN", "ZEHN", "ELF", "ZWÖLF", "ZWANZIG", "UHR"]
 
 
 def find_words(grid, words):
