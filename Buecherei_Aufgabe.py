@@ -1,0 +1,176 @@
+class Books:
+    book_count = 0
+
+    def __init__(self, name, author, isbn, verliehen):
+
+        self.__name = name
+        self.__isbn = isbn
+        self.__author = author
+        self.__verliehen = verliehen
+        Books.book_count += 1
+
+    def ausleihen(self):
+
+        if self.__verliehen is True:
+            print("Das Buch ist bereits verliehen")
+
+        else:
+            self.__verliehen = True
+
+    def rueckgabe(self):
+
+        if self.__verliehen is True:
+            self.__verliehen = False
+
+        else:
+            print("Das Buch ist nicht verliehen")
+
+    def verfuegbarkeit(self):
+
+        if self.__verliehen is True:
+            print("Das Buch ist verliehen")
+
+        else:
+            print("Das Buch ist nicht verliehen")
+
+    # Objekt ausgabe im Terminal als String
+    def __str__(self):
+
+        if self.__verliehen is True:
+            __status = "Ja"
+
+        else:
+            __status = "Nein"
+
+        return (f"Titel: {self.__name}, Author: {self.__author}, "
+                f"ISBN: {self.__isbn}, Verliehen? {__status}")
+
+    def get_name(self):
+
+        return self.__name
+
+    def get_isbn(self):
+
+        return self.__isbn
+
+
+class Roman(Books):
+
+    def __init__(self, name, author, isbn, verliehen, genre):
+
+        super().__init__(name, author, isbn, verliehen)
+        self.__genre = genre
+
+    def __str__(self):
+
+        return super().__str__() + f", Genre: {self.__genre}"
+
+
+class Fachbuch(Books):
+
+    def __init__(self, name, author, isbn, verliehen, fach):
+
+        super().__init__(name, author, isbn, verliehen)
+        self.__fach = fach
+
+    def __str__(self):
+
+        return super().__str__() + f", Fach: {self.__fach}"
+
+
+class Buecherei:
+
+    def __init__(self, name):
+
+        self.__name = name
+        self.__buecher = []
+
+    def buch_hinzufuegen(self, buch):
+
+        self.__buecher.append(buch)
+
+    def buch_entfernen(self, isbn):
+
+        for buch in self.__buecher:
+
+            if buch.get_isbn() == isbn:
+
+                self.__buecher.remove(buch)
+                print("Buch wurde entfernt")
+                return
+
+        print("Buch wurde nicht gefunden")
+
+    def buch_finden(self, isbn):
+
+        for buch in self.__buecher:
+
+            if buch.get_isbn() == isbn:
+
+                print(buch)
+                return
+
+    def buecherliste(self):
+
+        for buch in self.__buecher:
+            print(buch)
+
+    def buecheranzahl(self):
+
+        print(len(self.__buecher))
+
+
+# Objekt Erstellung
+buecherei = Buecherei("Pustet")
+
+buchliste = [
+    Roman("Eragon Band 1", "Christopher Paolini",
+          "123-123456789", False, "Fantasy"),
+    Roman("Eragon Band 2", "Christopher Paolini",
+          "123-987654321", False, "Fantasy"),
+    Roman("1984", "George Orwell",
+          "978-0141036144", True, "Dystopie"),
+    Fachbuch("Informatik für Dummies", "christian Haffner",
+             "978-3527716198", True, "Lehrbuch"),
+    Roman("Der große Gatsby", "F. Scott Fitzgerald",
+          "978-0743273565", False, "Klassiker"),
+    Roman("Moby Dick", "Herman Melville",
+          "978-1503280786", False, "Abenteuer"),
+    Roman("Pride and Prejudice", "Jane Austen",
+          "978-1503290563", True, "Romanze"),
+    Roman("To Kill a Mockingbird", "Harper Lee",
+          "978-0061120084", False, "Drama"),
+    Roman("Brave New World", "Aldous Huxley",
+          "978-0060850524", True, "Dystopie"),
+    Roman("War and Peace", "Leo Tolstoy",
+          "978-0199232765", True, "Historischer Roman"),
+    Fachbuch("Clean Code", "Robert C. Martin",
+             "978-0132350884", True, "Programmierung"),
+    Fachbuch("Design Patterns",
+             "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+             "978-0201633610", True, "Software Engineering"),
+    Fachbuch("Introduction to Algorithms",
+             "Thomas H. Cormen, Charles E. Leiserson,"
+             "Ronald L. Rivest, Clifford Stein",
+             "978-0262033848", True, "Algorithmen"),
+    Fachbuch("Artificial Intelligence: A Modern Approach",
+             "Stuart Russell, Peter Norvig", "978-0136042594",
+             True, "Künstliche Intelligenz"),
+    Fachbuch("The Pragmatic Programmer", "Andrew Hunt, David Thomas",
+             "978-0201616224", False, "Softwareentwicklung"),
+    Fachbuch("Java ist auch eine Insel", "christian Ullenboom",
+             "978-3527716198", False, "Lehrbuch")
+]
+
+for buch in buchliste:
+
+    buecherei.buch_hinzufuegen(buch)
+# Test der Methoden
+
+
+buecherei.buecherliste()
+buecherei.buch_finden("123-987654321")
+buecherei.buch_entfernen("123-123456789")
+buecherei.buecherliste()
+print(Books.book_count)
+buecherei.buecheranzahl()
