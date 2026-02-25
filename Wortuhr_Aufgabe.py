@@ -18,6 +18,7 @@ words = ["ES", "IST", "VOR", "HALB", "NACH", "VIERTEL", "DREIVIERTEL",
          "ACHT", "NEUN", "ZEHN", "ELF", "ZWÖLF", "ZWANZIG", "UHR"]
 
 
+# Methode: Wörter finden
 def find_words(grid, words):
     results = {}
 
@@ -42,6 +43,7 @@ def find_words(grid, words):
     return results
 
 
+# Methoden: Farben ändern
 def set_color(positions, color):
     for r, c in positions:
         label_grid[r][c].config(fg=color)
@@ -64,6 +66,7 @@ def reset_color():
             lbl.config(fg="white")
 
 
+# Methode: Uhrzeitanzeige
 def update_time():
     reset_color()
     reset_color_bg()
@@ -153,14 +156,14 @@ def update_time():
 
 label_grid = []
 label_grid_min = []
-
+# Fenster Erstellung
 uhr = tk.Tk()
 uhr.title("Wort Uhr")
 uhr.config(bg="black")
 uhr.geometry("290x460")
 uhr.resizable(False, False)
 
-
+# Buchstaben erzeugen
 for r, row in enumerate(letters):
     label_row = []
     for c, char in enumerate(row):
@@ -170,7 +173,7 @@ for r, row in enumerate(letters):
         label_row.append(lbl)
     label_grid.append(label_row)
 
-
+# Gefundene Wörter Variablen zuweisen
 word_pos = find_words(letters, words)
 
 es_ist = word_pos["ES"][0] + word_pos["IST"][0]
@@ -196,7 +199,7 @@ nach = word_pos["NACH"][0]
 halb = word_pos["HALB"][0]
 vor = word_pos["VOR"][0]
 
-
+# Punkte für Minuten erstellen
 for i in range(4):
     lbl2 = tk.Label(uhr, text="●", bg="black", fg="black",
                     font=("Courier", 20))
