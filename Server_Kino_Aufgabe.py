@@ -14,7 +14,7 @@ def handle_message(client_socket, message: str):
     """Logikschicht: verarbeitet eine Nachricht und sendet Antwort zurück."""
     message = message.strip().upper()
 
-    # LIST → freie Plätze als CSV
+    # LIST → freie Plätze
     if message == "LIST":
         free_seats = [seat for seat, reserved in SEATS.items() if not reserved]
         if free_seats:
